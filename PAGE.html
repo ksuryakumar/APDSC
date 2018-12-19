@@ -1,0 +1,654 @@
+
+
+
+
+<html>
+<head>
+	<title> :: A P D S C ::</title>
+	
+		<META HTTP-EQUIV="PRAGMA" content="NO-CACHE">
+		<META HTTP-EQUIV="CACHE-CONTROL" content="NO-CACHE">
+		<META HTTP-EQUIV="EXPIRES" content="0">
+		<Script type="text/javascript">
+			window.history.forward(1);
+		</Script>
+		
+	<style type="text/css">
+	<!--
+	body {
+		margin-left: 0px;
+		margin-top: 0px;
+		margin-right: 0px;
+		margin-bottom: 0px;
+		background-color: #AABBCC;
+		
+	}
+	-->
+	</style>
+<link rel="icon" href="/images/bg/cfss.png"
+			type="image/x-icon" />
+	<link href="/themes/appsc6.css" rel="stylesheet" type="text/css" />
+	<link href="/themes/ApplicationStyle.css" rel="stylesheet"
+			type="text/css" />
+	<link rel="stylesheet" href="/themes/tooltip/simple-tooltip.css"
+			media="screen" type="text/css">
+		<script type="text/javascript"
+			src="/javascript/tooltip/simple-tooltip.js"></script>
+	<script language="JavaScript1.2" type="text/javascript"
+			src="/javascript/commonJSfunctions.js"></script>
+	<script language="JavaScript1.2" type="text/javascript"
+			src="/javascript/calender/datetimepicker.js"></script>
+	
+
+</head>
+<body oncontextmenu="return false;">
+
+	<table width="900px" border="0" align="center" cellpadding="1"
+		cellspacing="1" bgcolor="#fffbfb">
+		  
+		<TR>
+			<TD align="center" valign="top" height="800px" width="100px">
+				
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+
+<script type="text/javascript" src="jQuery/jquery-1.10.1.js"></script>
+<link rel="stylesheet" type="text/css" href="jQuery/jquery-ui.css">
+<script type="text/javascript" src="jQuery/jquery-ui.js"></script>
+<!-- <script type="text/javascript" src="jQuery/jquery.maskedinput-1.2.2.js"></script> -->
+<script type="text/javascript"
+	src="javascript/calender/datetimepicker.js"></script>
+
+<script type="text/javascript" src="js/aadharverification.js"></script>
+
+
+<script language="JavaScript1.2" type="text/javascript"
+	src="JSCSS/JS/commonJSfunctions.js"></script>
+<link href="themes/shashi-styles.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript1.2" type="text/javascript"
+	src="JSCSS/JS/datetimepicker.js"></script>
+
+
+
+<link href="css/custom.css" rel="stylesheet">
+<link rel="stylesheet" href="css/employeeDetails.css" />
+
+<script type="text/javascript">
+  	
+
+
+
+function getSelectedValueRadioButton(ctrl)
+	{
+		for(var i=0;i<ctrl.length;i=i+1)
+		{
+			if(ctrl[i].checked==true)
+			{
+				return ctrl[i].value;
+			}
+		}
+		return "#";
+	}
+
+
+$(function() 
+			{
+		              //var tooltips = $( "[title]" ).tooltip();	
+				$( "#dob" ).datepicker({
+					defaultDate: "+1w",
+					changeMonth: true,
+					changeYear: true,
+					dateFormat : 'dd/mm/yy',
+					minDate : '01/07/1964',
+					maxDate : '30/06/2000'
+					
+					});
+           });	
+           
+           
+           
+    function getOtp()
+    {
+    
+       if(document.forms[0].elements["dyna(candidate_id)"].value=="" || document.forms[0].elements["dyna(candidate_id)"].value.length!=8 )
+       	{
+			alert("Please Enter Valid Candidate Id ");
+			
+		} else if( document.forms[0].elements["dyna(dob)"].value=="")
+       	{
+			alert("Please Enter Valid  Date Of Birth");
+		}
+		else if(document.forms[0].elements["dyna(aadhar_no)"].value=="" || document.forms[0].elements["dyna(aadhar_no)"].value.length!=12 || !validate( document.forms[0].elements["dyna(aadhar_no)"].value))  
+			{
+			   alert("Please Enter Valid Aadhar No");
+			}
+		else if(!isValidNumeric(document.forms[0].elements["dyna(candidate_id)"].value))
+		{
+		  alert("Please Enter Valid Candidate Id");
+		} 
+		else
+		{
+			document.forms[0].elements['mode'].value="LoginEmpValidate";
+			document.forms[0].submit();
+		}
+	
+    }
+    
+    function getDetails()
+    {
+    
+    var frm=document.forms[0];
+    
+    
+         if(document.forms[0].elements["dyna(otp_code)"].value=="" 
+         || document.forms[0].elements["dyna(otp_code)"].value.length!=5)
+       	{
+       	    //alert("otp_code---->"+document.forms[0].elements["dyna(otp_code)"].value+"--otpverificationcode-->"+document.forms[0].elements["dyna(otpverificationcode)"].value);
+			alert("Please Enter Valid OTP");
+		}
+		/* else if (frm.elements["dyna(ht_session)"].value == "0") {
+                        
+           alert("Please Select Ht Session");
+        } */
+        else if (frm.elements["dyna(center_code)"].value == "0") {
+                        
+           alert("Please Select Center");
+        }
+        	
+		else
+		{
+	  		var r = confirm("Are You Sure You want to Submit");
+			if (r == true) 
+			{
+				document.forms[0].elements['mode'].value="getDetails";
+		  		document.forms[0].submit();} else {
+    			return false;
+			} 
+
+  		}
+  	}
+  	
+  	function otherthan_symbols_cs(e)
+{
+	var key;
+	var keychar;
+
+	if (window.event)
+		key = window.event.keyCode;
+	else if (e)
+		key = e.which;
+	else
+		return true;
+
+	keychar = String.fromCharCode(key);
+	keychar = keychar.toLowerCase();
+
+	// control keys
+
+	if ((key==0) || (key==8) || (key==9) || (key==13) || (key==27) || (key==127))
+		return true;
+
+	// alphas and numbers
+	else if ((("0123456789").indexOf(keychar) > -1))
+		return true;
+	else
+		return false;
+}
+  	
+  	
+  	function isValidNumeric(text)
+  	{
+  	//alert("text==>"+text);
+    var status = false;
+    if (text != ''){
+        for (var i = 0;i<text.length;i++) {
+            if ((("0123456789").indexOf((text.substring(i, i+1)).toLowerCase()) == -1))
+            {
+                status = false;
+                i = text.length;
+            }
+            else{
+                status = true;
+            }
+        }}else{
+            status = true;
+        }
+       	//alert("status==>"+status);
+        
+   	 return status;
+	}
+
+function examCenterprefValidator(ctrl, index) {
+
+    var examCenterValidStr = "#";
+    ctrlValue = ctrl.value.toString();
+
+    for(var i=1; i <= 7; i=i+1) {
+        if(i!=index) {
+            examCenterValidStr = examCenterValidStr+ document.getElementById("center_location_"+ i).value.toString()  + "#";
+        }
+    }
+
+    var yy=examCenterValidStr.indexOf("#"+ctrlValue+"#");
+    if( examCenterValidStr.indexOf("#"+ctrlValue+"#")!=-1 && ctrlValue!="0") {
+        alert("This Exam Center preference is already selected");
+        ctrl.value = "0";
+    }
+
+}
+function changeCenterAjax2()
+{
+
+  if($("#ht_session").val() !="" && $("#ht_session").val().length > 0)
+  {
+  
+  $("#center_code").empty();
+    $.ajax({
+       type:"POST",
+       url:"apdscOptcenterSgtSS161119941126.dsc?mode=getCentersAjax2&candidateId="+document.forms[0].elements["dyna(update_candidate_Id)"].value+"&update_opted_district_code="+document.forms[0].elements["dyna(update_opted_district_code)"].value+"&post_code="+document.forms[0].elements["dyna(post_code)"].value+"&htsession="+$("#ht_session").val()+"&subjectcode="+$("#subject_code").val()+"&mediumcode="+$("#medium_code").val(),
+       data:"{}",
+       success:function(response)
+       {
+          //alert("msg====>"+response);
+          var response=jQuery.parseJSON(response);
+          if(response!=null)
+          {
+	          if(response.centertf=="true")
+	          {
+	            $("#center_code").find("option").remove().end().append(response.centersList);
+	          }
+	          else
+	           {
+	           alert("Not available Centers");
+	           }
+           }
+       }
+       
+    });
+  
+  }
+
+}
+
+function changeCenterAjax() 
+{
+	if ($("#ht_session").val() !="" && $("#ht_session").val().length > 0) 
+    {
+
+		var url = "";
+
+		url = "apdscOptcenterSgtSS161119941126.dsc?mode=getCentersAjax&candidateId="+document.forms[0].elements["dyna(update_candidate_Id)"].value+"&update_opted_district_code="+document.forms[0].elements["dyna(update_opted_district_code)"].value+"&post_code="+document.forms[0].elements["dyna(post_code)"].value+"&htsession="+$("#ht_session").val()+"&subjectcode="+$("#subject_code").val()+"&mediumcode="+$("#medium_code").val();
+
+		loadAjaxDataforCenters(url, 'center_code', 'center', 'id', 'center_name');
+	}
+}
+
+
+
+function loadAjaxDataforCenters(url, appendto, parseBy, id, center_name) {
+
+	$('#' + appendto).empty();
+	var array = [];
+	var i = 0;
+	$.post(url, function(data, status) {
+		if (data != null && data != '') {
+			//alert("data::-->"+data);
+			$(data).find(parseBy).each(
+					function() {
+						array[i++] = "<option value='"
+							+ $(this).find(id).text() + "'>"
+							+ $(this).find(center_name).text()
+							+ "</option>";
+					});
+		}
+
+		$('#' + appendto).append(array.join(''));
+		if (appendto == 'routeId') {
+			if (array.length == 1) {
+				alert("Route Not Exists");
+			}
+		}
+	});
+} 
+
+
+function changeCenter() 
+   {
+
+    
+    if ($("#ht_session").val() !="" && $("#ht_session").val().length > 0) 
+    {
+      // alert("dist--->"+$("#district").val());
+  
+  		$("#center_code").empty();
+    	$("#center_code").get(0).options.length = 0;
+        $("#center_code").get(0).options[0] = new Option("Select Center", "0");
+ 
+        $.ajax({
+            type: "POST",
+            url: "apdscOptcenterSgtSS161119941126.dsc?mode=getCenters&candidateId="+document.forms[0].elements["dyna(update_candidate_Id)"].value+"&update_opted_district_code="+document.forms[0].elements["dyna(update_opted_district_code)"].value+"&post_code="+document.forms[0].elements["dyna(post_code)"].value+"&htsession="+$("#ht_session").val()+"&subjectcode="+$("#subject_code").val()+"&mediumcode="+$("#medium_code").val(),
+            data: "{}",
+            success: function(msg2) 
+            {
+            	returnElements = msg2.split("||");
+    			for(var i = 0; i < returnElements.length; i++)
+    			{
+    				valueLablePair = returnElements[i].split("#");
+    				$("#center_code").get(0).options[i] = new Option(valueLablePair[1], valueLablePair[0]);
+    			}
+            },
+            error: function() 
+            {
+                $("#center_code").get(0).options.length = 0;
+                alert("Failed to load Employee Details.");
+            }
+        });
+    }
+    else 
+    {
+    	$("#center_code").get(0).options.length = 0;
+        $("#center_code").get(0).options[0] = new Option("Select Center", "0");
+    }
+}
+
+function printReport(id, title) {
+		try {
+			var sOption = "toolbar=no,location=no,directories=no,menubar=no,";
+			sOption += "scrollbars=yes,left=0,top=0,height=600 ,color=black";
+			var pp = window.open("", "", sOption);
+			pp.document.open();
+			pp.document.writeln('<HTML><HEAD><title>Print Preview</title>');
+			pp.document
+					.writeln('<LINK href=themes/shashi-styles.css type="text/css" rel="stylesheet">');
+			pp.document.writeln('<base target="_self"><style></style></HEAD>');
+			pp.document.write('<body>');
+			pp.document
+					.writeln('<TABLE width=100%><TR><TD></TD></TR><TR><TD align=center>');
+			pp.document
+					.writeln('<INPUT ID="PRINT" type="button" value="Print" ');
+			pp.document.writeln('onclick="window.print();">');
+			pp.document.writeln('<INPUT ID="CLOSE" type="button" '
+					+ 'value="Close" onclick="window.close();">');
+			 pp.document
+					.writeln('</TD></TR><TR><TD align=center></TD></TR><TR><TD align=center><b>Acknowledgement <br/> GOVERNMENT OF ANDHRA PRADESH <br /> DEPARTMENT OF SCHOOL EDUCATION <br /> TRT and TETcumTRT - 2018</b></TD></TR></TABLE>'); 
+			pp.document.write('<br/>');
+			pp.document
+					.write('<center><table border="1" cellpadding="0" cellspacing="0" class="printClass">');
+
+			var sWinHTML = document.getElementById(id).innerHTML;
+			pp.document.write(sWinHTML);
+			pp.document.write('</table></center>');
+			pp.document.write('</body></html>');
+			pp.document.close();
+			parent.window.focus();
+		} catch (e) {
+			alert(e);
+		}
+		return false;
+
+	}
+  </script>
+
+<style type="text/css">
+.newtable table {
+	color: #333;
+	border-spacing: 0;
+	border: 2px solid lightblue;
+	/* margin: 50px auto; */
+	/* border-radius:5px; */
+}
+
+.newtable thead tr:first-child {
+	background: ##9b700e;
+	color: #fff;
+	font-family: sans-serif;
+	border-bottom: none;
+}
+
+.newtable tbody tr td {
+	font-size: 0.8em;
+	font-family: sans-serif;
+	padding: 8px;
+}
+
+.newtable th {
+	font-size: 1em;
+	padding: 8px;
+}
+
+.newtable tbody tr:last-child td {
+	border: none;
+}
+
+.newtable tbody td {
+	border-bottom: 1px solid #ddd;
+}
+
+.theader {
+	background-color: #9b700e;
+}
+
+.table {
+	border-collapse: collapse;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	border: thin solid #ACC0DF;
+}
+
+.table td {
+	border-collapse: collapse;
+	border: thin solid #ACC0DF;
+}
+
+.table-colored>tbody>tr:>td,.table-striped>tbody {
+	background: #6296ae;
+	padding: 10px;
+	border: 1px;
+}
+
+.table-colored>tbody>tr:>td,.table-striped>tbody {
+	background: #958f5a;
+	padding: 10px;
+	border: 1px;
+}
+
+.table-colored>tbody>tr:nth-child(even)>td,.table-striped>tbody {
+	background: #cddef2;
+	padding: 10px;
+}
+
+.table-colored>tbody>tr:nth-child(odd)>td,.table-striped>tbody {
+	background: #e7e9ec;
+	padding: 10px;
+}
+
+.table th {
+	background: #20B2AA;
+	/* background: #7de5f6; */
+	padding: 10px;
+	color: darkblue;
+	border: thin solid #ACC0DF;
+	font-size: 18px;
+}
+
+.table td.highlight2 {
+	background: #e7e9ec;
+	padding: 10px;
+	color: black;
+}
+
+.table td.highlight1 {
+	background: #cddef2;
+	padding: 10px;
+	color: black;
+}
+
+.table td {
+	background: #f4f5f7;
+	padding: 8px;
+	color: black;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	border: thin solid #5f98c6;
+}
+
+.table td.highlight2 {
+	background: #e7e9ec;
+	padding: 10px;
+	color: black;
+}
+
+.table td.highlight1 {
+	background: #cddef2;
+	padding: 10px;
+	color: black;
+}
+
+.form-control {
+	box-shadow: 1px 1px 45px #333;
+	transition: 200ms all ease;
+	border: none;
+	padding: 5px 5px;
+}
+
+.form-control:hover {
+	margin: -5px 0 0 -5px;
+	height: 29px;
+	width: 250px;
+}
+</style>
+</head>
+
+<body>
+	<form name="ApDscOptExamCenterForm" method="post" action="/apdscOptcenterSgtSS161119941126.dsc" onsubmit="return false;">
+		<input type="hidden" name="mode" value="">
+		<input type="hidden" name="dyna(update_candidate_Id)" value="30164688" id="update_candidate_Id">
+		<input type="hidden" name="dyna(update_opted_district_code)" value="103" id="update_opted_district_code">
+
+
+
+		<fieldset>
+			<table class="table table-colored" align="center" width="100%">
+
+				<tr>
+					<th class="table table-colored"><font color="white" size="3">
+							GOVERNMENT OF ANDHRA PRADESH <br /> DEPARTMENT OF SCHOOL
+							EDUCATION <br /> TRT and TETcumTRT<br />Opt Exam Center - SGT</font> <br></th>
+				</tr>
+
+			</table>
+		</fieldset>
+		
+		
+
+		
+
+
+		<center>
+
+
+			
+			
+			
+
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<a href="JavaScript:void(0);"
+						onclick="printReport('printReportacknowledgement','')"
+						title="Print Preview"> <img border="0"
+						src="https://apdscreports183296.apcfss.in:443/images/print.gif" alt="Print" />&nbsp;Print</a>
+					<div class="border-block mb20" style="width: 70%">
+						<div class="block-title">Acknowledgement</div>
+						<div class="inner-content-div" align="center">
+
+
+							<table class="table1" cellpadding="0" cellspacing="0"
+								id="printReportacknowledgement">
+								
+									<tr class="row1">
+										<td class="cell"><b>Candidate Id</b></td>
+										<td class="cell">30164688</td>
+									</tr>
+
+									<tr class="row1">
+										<td class="cell"><b>Candidate Name</b></td>
+										<td class="cell">NEELI SWATHI</td>
+									</tr>
+
+									<tr class="row1">
+										<td class="cell"><b>Date Of Birth</b></td>
+										<td class="cell">18-JUL-1995</td>
+									</tr>
+
+									<tr class="row1">
+										<td class="cell"><b>Aadhar No</b></td>
+										<td class="cell">5XXXXXXXXXX4</td>
+									</tr>
+
+
+
+									<tr class="row1">
+										<td class="cell"><b>Post Name</b></td>
+										<td class="cell">SECONDARY GRADE TEACHER</td>
+									</tr>
+									
+									<tr class="row1">
+										<td class="cell"><b>Subject Name</b></td>
+										<td class="cell">NO SUBJECT</td>
+									</tr>
+									
+									<tr class="row1">
+										<td class="cell"><b>Medium Name</b></td>
+										<td class="cell">TELUGU</td>
+									</tr>
+									
+									
+									
+
+									
+
+									<tr class="row1">
+										<td class="cell"><b>Opted Exam Center Name</b></td>
+										<td class="cell">VISAKHAPATNAM</td>
+									</tr>
+
+
+								
+
+
+
+							</table>
+
+
+						</div>
+					</div>
+				</div>
+			
+
+
+
+			
+				<center>
+					<font size="3" color="green">Your Details are Updated Successfully</font>
+				</center>
+			
+		</center>
+	</form>
+</body>
+</html>
+
+			</TD>
+		</TR>
+		<tr>
+			<td height="30" colspan="3" align="center" valign="middle"
+				 bgcolor="#278acd" ><span
+				class="style10"><font color="white"><b>Designed and Developed by</b></font></span> <a
+				href="https://apcfss.in/" target="_blank" class="cfss"><font color="deepblue"><b>APCFSS</b></font></a></td>
+		</tr>
+	</table>
+</body>
+</html>
